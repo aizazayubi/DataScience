@@ -1,0 +1,56 @@
+import pandas as pd
+import pyodbc
+
+# Connect to your database
+server = 'your_server_name'
+database = 'your_database_name'
+username = 'your_username'
+password = 'your_password'
+
+# Create a connection string
+conn_str = f"DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+
+# Connect to the database
+conn = pyodbc.connect(conn_str)
+
+# Define your SQL query
+query = """
+SELECT * 
+FROM employees 
+WHERE age BETWEEN 20 AND 40
+"""
+
+# Execute the query and load data into a pandas DataFrame
+df = pd.read_sql(query, conn)
+
+# Close the connection
+conn.close()
+
+# Display the retrieved data
+print(df)
+
+
+##
+import pandas as pd
+from google.colab import drive
+
+# Mount your Google Drive
+#drive.mount('/content/drive')
+
+# Specify the path to your Excel file on Google Drive
+file_path = '/content/sample_data/vhls.xlsx'
+
+# Read the Excel file into a Pandas DataFrame
+df = pd.read_excel(file_path)
+
+# Print the first 10 rows of the DataFrame
+
+# Filter the DataFrame to include only rows where the 'color' column is 'red' or 'yellow'
+filtered_df = df[(df['Color'] == 'silver') | (df['Color'] == 'yellow')]
+
+print(filtered_df)
+
+
+
+
+#
